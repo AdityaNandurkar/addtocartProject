@@ -1,0 +1,35 @@
+<!-- CAROUSEL SECTION STARTS -->
+<ngb-carousel *ngIf="images" class="mb-5" >
+    <ng-template ngbSlide *ngFor="let i of images">
+        <div class="picsum-img-wrapper">
+            <img [src]="i" class="w-100" />
+        </div>
+    </ng-template>
+</ngb-carousel>
+<!-- CAROUSEL SECTION ENDS -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 mb-4" *ngFor="let product of productList | filter:searchKey:'name'">
+            <div class="card mb-4">
+                <img class="card-img-top" routerLink="/product/{{product.category}}/{{product.id}}"
+                    [src]="product.image" [alt]="product.name">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-rating">{{product.rating}}&nbsp;<i class="bi bi-star-fill"></i></p>
+                    <p class="card-price">{{ product.price | currency:"INR" }} <small
+                            style="font-weight: lighter;">M.R.P.<del>{{product.delPrice |
+                                currency:"INR"}}</del></small>&nbsp;<span class="card-discount">{{
+                            product.discount}}&percnt;&nbsp;off</span></p>
+                    <button class="btn btn-warning" (click)="addToCart(product)">
+                        Add to Cart
+                    </button>
+                    <!-- <button class="btn btn-warning" routerLink="/cart" *ngIf="product.length!=0">
+                        Go to Cart
+                    </button> -->
+                    <a routerLink="/product/{{product.category}}/{{product.id}}" class="viewDetails">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

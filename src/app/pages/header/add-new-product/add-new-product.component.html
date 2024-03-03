@@ -1,0 +1,49 @@
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add New Products</h4>
+        <button class="btn btn-warning close" aria-label="Close" (click)="modal.dismiss('Cross Click')">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="productName" class="form-label">Product Name</label>
+                <input type="text" class="form-control" formControlName="name" id="productName"
+                    placeholder="Product Name">
+
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" formControlName="description" id="description" cols="10" rows="4"
+                    placeholder="Enter Product Description . . ."></textarea>
+
+                <label for="imageUrl" class="form-label">Image Url</label>
+                <input type="text" class="form-control" formControlName="image" id="imageUrl" placeholder="Image Url">
+
+                <label for="price" class="form-label">Price</label>
+                <input type="text" class="form-control" formControlName="price" id="price" placeholder="Product Price">
+
+                <label for="delPrice" class="form-label">Previous Price</label>
+                <input type="text" class="form-control" formControlName="delPrice" id="delPrice"
+                    placeholder="Old Price">
+
+                <label for="discount" class="form-label">Discount</label>
+                <input type="text" class="form-control" formControlName="discount" id="discount" placeholder="Discount">
+
+                <label for="rating" class="form-label">Rating</label>
+                <input type="text" class="form-control" formControlName="rating" id="rating" placeholder="Rating">
+
+                <label for="category" class="form-label">Category</label>
+                <select class="form-control" formControlName="category" id="category">
+                    <option value="" [selected]="true">Select Category...</option>
+                    <option *ngFor="let category of ['mobile', 'fashion', 'toys', 'grocery']">{{ category }}
+                    </option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="modal.close('save click')">Submit</button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-outline-dark" (click)="modal.close('save click')">Cancel</button>
+    </div>
+</ng-template>
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
